@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh; background-image: url('{{ url_for('static', filename='images/fruit.jpg') }}'); background-size:cover; background-position: center;">
+        <div class="col-md-6 text-center">
+            <h1 class="display-4 mb-4" style="font-family: 'Poppins', sans-serif; color: #ff6347; font-size: 4rem; background: linear-gradient(45deg, #ff6347, #ffa500); -webkit-background-clip: text; color: transparent; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); font-weight: bold; letter-spacing: 2px;">Fruit🛒Store</h1>
+            <h2 style="color: #fff;">Login</h2>
+            <form method="POST" class="bg-light p-4 rounded shadow-lg">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
