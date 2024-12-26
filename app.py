@@ -24,7 +24,7 @@ def get_db_connection():
 # Initialize database with tables
 def init_db():
     conn = get_db_connection()
-    conn.executescript('''
+    conn.executescript('''    
     CREATE TABLE IF NOT EXISTS user (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
@@ -49,6 +49,22 @@ def init_db():
         FOREIGN KEY (product_id) REFERENCES product (id)
     );
     ''')
+ 
+    # Add admin user if not exists
+    user_check = conn.execute('SELECT * FROM user WHERE id = 1').fetchone()
+    if not user_check:
+        hashed_password = generate_password_hash('12345')
+        conn.execute('INSERT INTO user (id, username, password, is_admin) VALUES (?, ?, ?, ?)',
+                     (1, 'arush', hashed_password, 1))
+        conn.commit()
+ 
+    # Add product if not exists
+    product_check = conn.execute('SELECT * FROM product WHERE id = 1').fetchone()
+    if not product_check:
+        conn.execute('INSERT INTO product (id, name, description, price, image) VALUES (?, ?, ?, ?, ?)',
+                     (1, 'Mango', 'Sweet and fresh', 10.50, 'Mango.jpg'))
+        conn.commit()
+ 
     conn.close()
  
 # Initialize the database if it doesn't exist
