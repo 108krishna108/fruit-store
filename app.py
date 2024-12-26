@@ -133,7 +133,7 @@ def add_product():
         image = request.form['image']
  
         conn = get_db_connection()
-        conn.execute('INSERT INTO product (name, description, price) VALUES (?, ?, ?, ?)',
+        conn.execute('INSERT INTO product (name, description, price, image) VALUES (?, ?, ?, ?)',
                      (name, description, price, image))
         conn.commit()
         conn.close()
